@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Voice</title>
+  <link rel="manifest" href="./manifest.webapp">
+  <script src="./js/main.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <form action="">
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">KEY</label>
+        <input type="text" class="form-control" id="key" placeholder="KEY">
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">VALUE</label>
+        <input type="text" class="form-control" id="value" placeholder="VALUE">
+      </div>
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+      </select>
+      <button type="submit" class="btn btn-primary">SEND</button>
+    </form>
+    <div class="result"></div>
+  </div>
+
+</body>
+
+</html>
