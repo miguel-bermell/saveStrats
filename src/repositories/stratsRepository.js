@@ -8,6 +8,10 @@ exports.findAllStrats = async () => {
   });
 };
 
+exports.findStratById = async (id) => {
+  return await Strat.findByPk(id);
+};
+
 exports.findAllStratsWithUserId = async (UserId) => {
   return await Strat.findAll({
     include: User,

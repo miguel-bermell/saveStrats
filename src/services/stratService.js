@@ -4,6 +4,12 @@ const {
   insertStratSchema,
   updateStratSchema,
 } = require("../validations/stratValidation");
+const checkOwnership = require("../utils/checkOwnership");
+
+exports.getStrat = async (id) => {
+  const strat = await stratRepository.findStratById(id);
+  return strat.toJSON();
+};
 
 exports.getAllStrats = async (user) => {
   const filter = user?.role === "user" || user === undefined;
@@ -33,4 +39,28 @@ exports.createStrat = async (strat, user) => {
     ...validationStrat,
     UserId: userId,
   });
+};
+
+exports.editStrat = async (user, stratId, stratDetails) => {
+  const strat = await stratRepository.findStratById(stratId);
+
+  if (!strat) {
+    throw new Error(`No Strat found with ID: ${stratId} `);
+  }
+
+  if (!checkOwnership(strat, user)) throw new Error("Unauthorized");
+
+  const validationStrat = await updateStratSchema.validateAsync(stratDetails);
+
+  await stratRepository.updateStrat(stratId, validationStrat);
+};
+
+exports.removeStrat = async (stratId, user) => {
+  const strat = await stratRepository.findStratById(stratId);
+
+  if (!strat) {
+    throw new Error(`Strat with ID: ${stratId} Not found`);
+  }
+  if (!checkOwnership(strat, user)) throw new Error("Unauthorized");
+  await stratRepository.deleteStrat(stratId);
 };

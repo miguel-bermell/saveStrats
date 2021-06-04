@@ -46,4 +46,24 @@ router.get(
   }
 );
 
+router.put("/:id", roleValidation("user"), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await stratService.editStrat(req.user, id, req.body);
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+});
+
+router.delete("/:id", roleValidation("user"), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await stratService.removeStrat(id, req.user);
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+});
+
 module.exports = router;
