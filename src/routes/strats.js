@@ -3,10 +3,10 @@ const router = express.Router();
 const stratService = require("../services/stratService");
 const roleValidation = require("../middlewares/roleValidation");
 
-router.post("/", roleValidation("user"), async (req, res, next) => {
+router.get("/profile:limit?:offset?", async (req, res, next) => {
   try {
-    await stratService.createStrat(req.body, req.user);
-    res.sendStatus(201);
+    const strat = await stratService.getPaginateUserStrats(req.user, req.query);
+    res.status(200).json(strat);
   } catch (error) {
     res.status(400).json({ msg: error.message });
   }
@@ -45,6 +45,15 @@ router.get(
     }
   }
 );
+
+router.post("/", roleValidation("user"), async (req, res, next) => {
+  try {
+    await stratService.createStrat(req.body, req.user);
+    res.sendStatus(201);
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+});
 
 router.put("/:id", roleValidation("user"), async (req, res, next) => {
   try {

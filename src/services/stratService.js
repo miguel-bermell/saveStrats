@@ -14,7 +14,7 @@ exports.getStrat = async (id) => {
 
 exports.getPaginateUserStrats = async (user, pagination) => {
   const { limit = 10, offset = 0 } = pagination;
-  const filter = user?.role === "user" || user === undefined;
+  const filter = user.id;
 
   return await stratRepository.paginateStratsByUserId(filter, {
     limit: +limit,
