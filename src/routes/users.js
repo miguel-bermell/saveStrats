@@ -1,7 +1,9 @@
 const express = require("express");
+const multer = require("../middlewares/multer");
 const router = express.Router();
 const userService = require("../services/userService");
 const roleValidation = require("../middlewares/roleValidation");
+const { VALUES } = require("../utils/constants");
 
 router.get("/all", async (req, res, next) => {
   try {
@@ -12,9 +14,13 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
-router.post("/signup", async (req, res, next) => {
+router.post("/signup", multer.single("avatar"), async (req, res, next) => {
   try {
-    await userService.signup(req.body);
+    let avatar = VALUES.AVATAR_DEFAULT;
+    if (req.file) {
+      avatar = req.file.path;
+    }
+    await userService.signup(req.body, avatar);
     res.sendStatus(201);
   } catch (error) {
     res.status(400).json({ msg: error.message });

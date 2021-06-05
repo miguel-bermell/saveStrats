@@ -8,7 +8,9 @@ const loadModels = () => {
     },
   });
   Strat.belongsTo(User);
-  dbConnection.sync().then(() => console.log("All models loaded"));
+  dbConnection
+    .sync({ alter: true })
+    .then(() => console.log("All models loaded"));
 };
 
 module.exports = loadModels;

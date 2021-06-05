@@ -7,13 +7,14 @@ exports.getAllUsers = async () => {
   return userRepository.findAllUsers();
 };
 
-exports.signup = async (userData) => {
+exports.signup = async (userData, avatar) => {
   const validationData = await insertUserSchema.validateAsync(userData); //User validation
   const encryptedPassword = await encryptPassword(validationData.password);
 
   await userRepository.createUser({
     ...validationData,
     password: encryptedPassword,
+    avatar: avatar,
   });
 };
 

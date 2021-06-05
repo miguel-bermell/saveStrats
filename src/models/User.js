@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const dbConnection = require("../config/db");
+const { VALUES } = require("../utils/constants");
 
 const User = dbConnection.define(
   "User",
@@ -26,6 +27,7 @@ const User = dbConnection.define(
     },
     avatar: {
       type: DataTypes.STRING,
+      defaultValue: VALUES.AVATAR_DEFAULT,
     },
   },
   {
