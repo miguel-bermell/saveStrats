@@ -31,12 +31,12 @@ router.get("/mystrats", roleValidation("user"), async (req, res, next) => {
 });
 
 router.get(
-  "/stratbycommand",
+  "/stratbycommand/:key",
   roleValidation("user"),
   async (req, res, next) => {
     try {
       const strat = await stratService.getStratFilteredWithCommand(
-        req.body,
+        req.params,
         req.user
       );
       res.status(200).json(strat);

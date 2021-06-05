@@ -7,8 +7,19 @@ const {
 const checkOwnership = require("../utils/checkOwnership");
 
 exports.getStrat = async (id) => {
+  if (!id) throw new Error("ID not found");
   const strat = await stratRepository.findStratById(id);
   return strat.toJSON();
+};
+
+exports.getPaginateUserStrats = async (user, pagination) => {
+  const { limit = 10, offset = 0 } = pagination;
+  const filter = user?.role === "user" || user === undefined;
+
+  return await stratRepository.paginateStratsByUserId(filter, {
+    limit: +limit,
+    offset: +offset,
+  });
 };
 
 exports.getAllStrats = async (user) => {
@@ -26,7 +37,7 @@ exports.getAllStratsByUserId = async (user) => {
 exports.getStratFilteredWithCommand = async ({ key }, user) => {
   console.log(user.id);
   console.log(key);
-  if (user.id !== user.id) throw new Error("You can't access here");
+  if (user.id !== user.id || !user.id) throw new Error("You can't access here");
   const userId = user.id;
   return await stratRepository.findStratByCommand(key, userId);
 };

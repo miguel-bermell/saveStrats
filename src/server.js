@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
-
+const cors = require("cors");
 const PORT = process.env.PORT || 4000;
 
 //Routes
@@ -16,6 +16,7 @@ const server = express();
 loadModels();
 
 server.use(express.json());
+server.use(cors());
 server.use(tokenValidation);
 server.use(express.static(path.join(__dirname, "public")));
 

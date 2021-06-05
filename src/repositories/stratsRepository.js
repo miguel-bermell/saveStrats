@@ -21,6 +21,14 @@ exports.findAllStratsWithUserId = async (UserId) => {
   });
 };
 
+exports.paginateStratsByUserId = async (UserId, { limit, offset }) => {
+  return await Strat.findAndCountAll({
+    findAllStratsWithUserId,
+    limit,
+    offset,
+  });
+};
+
 exports.findStratByCommand = async (key, UserId) => {
   return await Strat.findAll({
     where: {
