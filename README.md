@@ -6,5 +6,3 @@
   </a>
 
   <h3 align="center">Save Your Strats </h3>
-
-  
