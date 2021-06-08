@@ -28,6 +28,7 @@ exports.paginateStratsByUserId = async (UserId, { limit, offset }) => {
     },
     limit,
     offset,
+    order: [["updatedAt", "DESC"]],
   });
 };
 

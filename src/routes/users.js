@@ -5,6 +5,16 @@ const userService = require("../services/userService");
 const roleValidation = require("../middlewares/roleValidation");
 const { VALUES } = require("../utils/constants");
 
+router.get("/me", async (req, res, next) => {
+  try {
+    const { id } = req.user;
+    const user = await userService.getUserProfile(id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+});
+
 router.get("/all", async (req, res, next) => {
   try {
     const users = await userService.getAllUsers();
@@ -20,7 +30,7 @@ router.post("/signup", multer.single("avatar"), async (req, res, next) => {
     if (req.file) {
       avatar = req.file.path;
     }
-    await userService.signup(req.body, avatar);
+    await userService.signup({ ...req.body, avatar });
     res.sendStatus(201);
   } catch (error) {
     res.status(400).json({ msg: error.message });

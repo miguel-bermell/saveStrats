@@ -1,5 +1,9 @@
 const User = require("../models/User");
 
+exports.findUserById = async (id) => {
+  return await User.findByPk(id);
+};
+
 exports.findAllUsers = async () => {
   return await User.findAll();
 };

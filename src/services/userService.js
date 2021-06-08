@@ -3,18 +3,22 @@ const encryptPassword = require("../utils/encryptPassword");
 const { insertUserSchema } = require("../validations/userValidation");
 const { signToken } = require("./jwtService");
 
+exports.getUserProfile = async (id) => {
+  const user = await userRepository.findUserById(id);
+  return user.toJSON();
+};
+
 exports.getAllUsers = async () => {
   return userRepository.findAllUsers();
 };
 
-exports.signup = async (userData, avatar) => {
+exports.signup = async (userData) => {
   const validationData = await insertUserSchema.validateAsync(userData); //User validation
   const encryptedPassword = await encryptPassword(validationData.password);
 
   await userRepository.createUser({
     ...validationData,
     password: encryptedPassword,
-    avatar: avatar,
   });
 };
 
