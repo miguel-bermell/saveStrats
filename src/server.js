@@ -10,6 +10,7 @@ const usersRouter = require("./routes/users");
 const stratsRouter = require("./routes/strats");
 
 const loadModels = require("./models/relationship");
+const errorHandler = require("./middlewares/errorHandler");
 const tokenValidation = require("./middlewares/tokenValidation");
 
 const server = express();
@@ -23,4 +24,7 @@ server.use(express.static(path.join(__dirname, "public")));
 server.use("/", indexRouter);
 server.use("/users", usersRouter);
 server.use("/strats", stratsRouter);
+
+server.use(errorHandler);
+
 server.listen(PORT, () => console.log("Server running on port:", PORT));

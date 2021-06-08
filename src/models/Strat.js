@@ -10,7 +10,6 @@ const Strat = dbConnection.define("Strat", {
   },
   key: {
     type: DataTypes.STRING(35),
-    unique: true,
   },
   content: {
     type: DataTypes.STRING,

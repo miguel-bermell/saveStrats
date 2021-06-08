@@ -35,8 +35,17 @@ exports.paginateStratsByUserId = async (UserId, { limit, offset }) => {
 exports.findStratByCommand = async (key, UserId) => {
   return await Strat.findAll({
     where: {
-      UserId,
       key,
+      UserId,
+    },
+  });
+};
+
+exports.findStratIfExist = async (key, UserId) => {
+  return await Strat.findOne({
+    where: {
+      key,
+      UserId,
     },
   });
 };
