@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const dbConnection = require("../config/db");
 
-const Avatar = dbConnection.define("Avatar", {
+const Map = dbConnection.define("Map", {
   id: {
     primaryKey: true,
     type: DataTypes.INTEGER,
@@ -15,4 +15,4 @@ const Avatar = dbConnection.define("Avatar", {
   },
 });
 
-module.exports = Avatar;
+module.exports = Map;

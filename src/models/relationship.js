@@ -1,6 +1,7 @@
 const dbConnection = require("../config/db");
 const User = require("./User");
 const Strat = require("./Strat");
+
 const loadModels = () => {
   User.hasMany(Strat, {
     foreignKey: {
@@ -8,9 +9,7 @@ const loadModels = () => {
     },
   });
   Strat.belongsTo(User);
-  dbConnection
-    .sync({ alter: true })
-    .then(() => console.log("All models loaded"));
+  dbConnection.sync({}).then(() => console.log("All models loaded"));
 };
 
 module.exports = loadModels;
