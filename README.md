@@ -8,7 +8,7 @@
 
 
 
-### De que trata?
+### De qué trata?
 La idea de este proyecto es poder ayudar a los jugadores de videojuegos competitivos. Podrán almacenar y tener un acceso inmediato a las estrategias de su equipo. Pudiendo almacenar tantas tácticas como se quiera en un perfil privado de usuario. Tiene implementada una opción de poder llamar a la táctica por su nombre, utilizando la voz del usuario para facilitar la búsqueda de la táctica y además, la aplicación le responderá con voz diciendo el contenido de dicha táctica.
 
 ### Funcionalidad
